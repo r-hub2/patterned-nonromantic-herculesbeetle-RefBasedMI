@@ -76,7 +76,7 @@ contains
          result(answer)
       implicit none
       character(len=*), intent(in) :: whichsub
-	  character(len=*), parameter :: nonredundant_modnames(78) = (/ &
+	  character(len=*), parameter :: nonredundant_subnames(78) = (/ &
 		   "allocate_workspace_items                                                ", &
 		   "cholesky_saxpy                                                          ", &
 		   "dbl1_alloc                                                              ", &
@@ -171,7 +171,7 @@ contains
          result(answer)
       implicit none
       character(len=*), intent(in) :: comment
-	  character(len=*), parameter :: nonredundant_modnames(90) = (/ &
+	  character(len=*), parameter :: nonredundant_comments(90) = (/ &
 		   "A zero-length string is invalid                                         ", &
 		   "Argument beta has incorect length                                       ", &
 		   "Argument beta has incorrect shape                                       ", &
