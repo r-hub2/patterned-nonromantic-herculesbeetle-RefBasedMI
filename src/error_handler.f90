@@ -52,9 +52,14 @@ contains
          result(answer)
       implicit none
       character(len=*), intent(in) :: whichmod
-	  character(len=*), parameter :: nonredundant_modnames(6) = (/ &
-		   INCLUDE "icodes_1.h" // &  ! Concatenate strings from the include file
-		   "                                    " // &  ! Concatenate additional literal strings
+	  character(len=*), parameter :: &
+		   nonredundant_modnames(6) = (/ &
+		   "dynalloc                                                                ", &
+		   "matrix_methods                                                          ", &
+		   "norm_engine                                                             ", &
+		   "quick_sort                                                              ", &
+		   "random_generator                                                        ", &
+		   "                                    " // &
 		   "                                    " /)
       integer(our_int) :: i
       answer = 0
