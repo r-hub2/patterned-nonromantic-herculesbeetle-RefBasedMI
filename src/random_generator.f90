@@ -817,19 +817,20 @@ contains
       return
    end function ran_phrsd
    !####################################################################
-   integer(kind=our_int) function ran_seed()
-      !	Returns a positive-valued, randomly generated, 31-bit seed value
-      !   by calling the intrinsic function random_seed
-      implicit none
-      integer, dimension(:), allocatable :: theseed
-      integer :: idim
-      call random_seed()
-      call random_seed( size = idim )
-      allocate (theseed(idim))
-      call random_seed( get = theseed(1:idim) )
-      ran_seed = theseed(1)
-      deallocate (theseed)
-   end function ran_seed
+	 integer(kind=our_int) function ran_seed()
+		! Generates a pseudo-random 31-bit seed value using LCG
+		implicit none
+		integer(kind=our_int) :: ran_seed, a, c, m
+		integer(kind=our_int) :: current_seed
+		! Parameters for LCG (you can choose different values if needed)
+		parameter (a = 1103515245, c = 12345, m = 2147483648) ! Common LCG parameters
+		! Use a static seed for demonstration purposes (you might want to change this)
+		static integer(kind=our_int) :: seed = 123456789
+		! Update the seed value using LCG formula
+		seed = mod(a * seed + c, m)		
+		! Return the seed value
+		ran_seed = seed
+	end function ran_seed
    !####################################################################
    logical function is_leap_year(iyear)
       !	Returns .true. if iyear is a leap year.  Should work for the
