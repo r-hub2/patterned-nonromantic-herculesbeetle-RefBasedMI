@@ -10,8 +10,7 @@ module random_generator
    public :: random_gendata
    ! list public functions and subroutines
    public :: ran_genchi, ran_gengam, ran_sgamma, ran_snorm, &
-        ran_sexp, ran_genunf, ran_setall, ran_phrsd, ran_timeseed, &
-        ran_seed, ran_seed_is_set
+        ran_sexp, ran_genunf, ran_setall, ran_phrsd, ran_timeseed
    ! private parameter defining size of generator arrays
    integer(kind=our_int), parameter, private :: NUM_GEN = 32
    ! private module parameters formerly stored in a common block
@@ -817,20 +816,6 @@ contains
       return
    end function ran_phrsd
    !####################################################################
-	integer(kind=our_int) function ran_seed()
-		implicit none
-		integer(kind=our_int) :: ran_seed, a, c, m
-		integer(kind=our_int) :: current_seed
-		! Parameters for LCG (you can choose different values if needed)
-		parameter (a = 1103515245, c = 12345, m = 2147483648) ! Common LCG parameters
-		! Static seed for demonstration purposes
-		integer(kind=our_int), save :: seed = 123456789
-		! Update the seed value using LCG formula
-		seed = mod(a * seed + c, m)		
-		! Return the updated seed value
-		ran_seed = seed
-	end function ran_seed
-   !####################################################################
    logical function is_leap_year(iyear)
       !	Returns .true. if iyear is a leap year.  Should work for the
       !	next several centuries.
@@ -840,13 +825,5 @@ contains
            .and. (mod(iyear,100) /= 0) &
            .or. (mod(iyear,400) == 0))
    end function is_leap_year
-   !####################################################################
-   logical function ran_seed_is_set(gendata)
-      ! Returns .true. if random generator seed values have been set
-      implicit none
-      type(random_gendata) :: gendata
-      ran_seed_is_set = gendata%qqssd
-   end function ran_seed_is_set
-   !####################################################################
 end module random_generator
 !#######################################################################
