@@ -817,18 +817,17 @@ contains
       return
    end function ran_phrsd
    !####################################################################
-	 integer(kind=our_int) function ran_seed()
-		! Generates a pseudo-random 31-bit seed value using LCG
+	integer(kind=our_int) function ran_seed()
 		implicit none
 		integer(kind=our_int) :: ran_seed, a, c, m
 		integer(kind=our_int) :: current_seed
 		! Parameters for LCG (you can choose different values if needed)
 		parameter (a = 1103515245, c = 12345, m = 2147483648) ! Common LCG parameters
-		! Use a static seed for demonstration purposes (you might want to change this)
-		static integer(kind=our_int) :: seed = 123456789
+		! Static seed for demonstration purposes
+		integer(kind=our_int), save :: seed = 123456789
 		! Update the seed value using LCG formula
 		seed = mod(a * seed + c, m)		
-		! Return the seed value
+		! Return the updated seed value
 		ran_seed = seed
 	end function ran_seed
    !####################################################################
